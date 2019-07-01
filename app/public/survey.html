@@ -204,12 +204,14 @@
                     console.log("GET data:\n")
                     console.log(data)
                     var totalDiff = 0;
+                    var diffArray = [];
                     for (var i = 0; i < data.length; i++) {
                        for (var j = 0; j < data[i].scores.length; j++) {
                            totalDiff += difference(data[i].scores[j], quizAnswers.scores[j])
                        }
+                    diffArray.push(totalDiff)
                     }
-                    console.log(totalDiff + " is the totalDiff.")
+                    console.log(totalDiff + " is the totalDiffs per friend object.")
                 })
 
             $.post('api/friends', quizAnswers)
