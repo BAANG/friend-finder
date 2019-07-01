@@ -180,11 +180,11 @@
         $("#submit").on("click", function () {
             userInput = [];
             for (var i = 1; i < 11; i++) {
-               var inputVal = $('#q' + i + ' option:selected').val();
+                var inputVal = $('#q' + i + ' option:selected').val();
                 userInput.push(parseFloat(inputVal));
             }
-            
-            
+
+
             var quizAnswers = {
                 name: $("#name").val(),
                 photo: $("#photo").val(),
@@ -196,8 +196,11 @@
             $.post('api/friends', quizAnswers)
                 .then(function (data) {
                     console.log(data);
-
                 })
+
+            // TODO: Retrieve/iterate through all posted quiz answers and compare scores arrays.
+                    // - Establish variables to store scores per friend object (probably push into an array that corresponds to the index of the friends array)
+                    // - Print modal of friend object with lowest difference score
 
         })
     </script>
