@@ -193,10 +193,30 @@
 
             console.log(quizAnswers);
 
+            function difference(a ,b) {
+                a = parseInt(a)
+                b = parseInt(b)
+                return Math.abs(a-b);
+            }
+
+            $.get('api/friends', quizAnswers)
+                .then(function (data) {
+                    console.log("GET data:\n")
+                    console.log(data)
+                    var totalDiff = 0;
+                    for (var i = 0; i < data.length; i++) {
+                       for (var j = 0; j < data[i].scores.length; j++) {
+                           totalDiff += difference(data[i].scores[j], quizAnswers.scores[j])
+                       }
+                    }
+                    console.log(totalDiff + " is the totalDiff.")
+                })
+
             $.post('api/friends', quizAnswers)
                 .then(function (data) {
                     console.log(data);
                 })
+
 
             // TODO: Retrieve/iterate through all posted quiz answers and compare scores arrays.
                     // - Establish variables to store scores per friend object (probably push into an array that corresponds to the index of the friends array)
