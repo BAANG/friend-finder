@@ -4,7 +4,7 @@ var PORT = process.env.PORT || 3000;
 
 
 // Enable data-parsing methods for Express
-app.use(express.static(app));
+// app.use(express.static(app));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
