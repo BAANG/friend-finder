@@ -193,25 +193,27 @@
 
             console.log(quizAnswers);
 
-            function difference(a ,b) {
+            function difference(a, b) {
                 a = parseInt(a)
                 b = parseInt(b)
-                return Math.abs(a-b);
+                return Math.abs(a - b);
             }
 
             $.get('api/friends', quizAnswers)
                 .then(function (data) {
                     console.log("GET data:\n")
                     console.log(data)
-                    var totalDiff = 0;
                     var diffArray = [];
                     for (var i = 0; i < data.length; i++) {
-                       for (var j = 0; j < data[i].scores.length; j++) {
-                           totalDiff += difference(data[i].scores[j], quizAnswers.scores[j])
-                       }
-                    diffArray.push(totalDiff)
+                        var totalDiff = 0;
+                        for (var j = 0; j < data[i].scores.length; j++) {
+                            totalDiff += difference(data[i].scores[j], quizAnswers.scores[j])
+                        }
+                        diffArray.push(totalDiff)
                     }
-                    console.log(totalDiff + " is the totalDiffs per friend object.")
+                    console.log(diffArray + " is the totalDiffs per friend object.")
+                    console.log(findLeastDiff(diffArray) + " is the index of lowest number in the array.")
+
                 })
 
             $.post('api/friends', quizAnswers)
@@ -220,9 +222,18 @@
                 })
 
 
+            function findLeastDiff(array) {
+                var lowest = 0;
+                for (var i = 1; i < array.length; i++) {
+                    if (array[i] < array[lowest]) {
+                        lowest = i
+                    }
+                }
+                return lowest;
+            }
             // TODO: Retrieve/iterate through all posted quiz answers and compare scores arrays.
-                    // - Establish variables to store scores per friend object (probably push into an array that corresponds to the index of the friends array)
-                    // - Print modal of friend object with lowest difference score
+            // - Establish variables to store scores per friend object (probably push into an array that corresponds to the index of the friends array)
+            // - Print modal of friend object with lowest difference score
 
         })
     </script>
