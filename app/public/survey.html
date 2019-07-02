@@ -238,15 +238,15 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script>
-        $("#submit").on("click", function () {
+        $("#submit").on("click", function () { //Submit button function
             userInput = [];
-            for (var i = 1; i < 11; i++) {
+            for (var i = 1; i < 11; i++) { //Retrieves and stores answer data
                 var inputVal = $('#q' + i + ' option:selected').val();
                 userInput.push(parseFloat(inputVal));
             }
 
 
-            var quizAnswers = {
+            var quizAnswers = { //Stores input data including the name and photo
                 name: $("#name").val(),
                 photo: $("#photo").val(),
                 scores: userInput
@@ -254,13 +254,13 @@
 
             console.log(quizAnswers);
 
-            function difference(a, b) {
+            function difference(a, b) { // Parses the absolute distance between values.
                 a = parseInt(a)
                 b = parseInt(b)
                 return Math.abs(a - b);
             }
 
-            $.get('api/friends', quizAnswers)
+            $.get('api/friends', quizAnswers) // Iterates through all of the stored friend data and compares each of the scores to the user scores per each index.
                 .then(function (data) {
                     console.log("GET data:\n")
                     console.log(data)
@@ -270,13 +270,14 @@
                         for (var j = 0; j < data[i].scores.length; j++) {
                             totalDiff += difference(data[i].scores[j], quizAnswers.scores[j])
                         }
-                        diffArray.push(totalDiff)
+                        diffArray.push(totalDiff) // Stores all total difference scores to an empty
                     }
                     console.log(diffArray + " is the totalDiffs per friend object.")
                     console.log(findLeastDiff(diffArray) + " is the index of lowest number in the array.")
-                    var n = findLeastDiff(diffArray)
+                    
+                    var n = findLeastDiff(diffArray) // Index of the friend object with the lowest total differences in scores.
 
-                    var friendMatch = $("<h2>")
+                    var friendMatch = $("<h2>") // Appends matching friend data to modal
                     friendMatch.append("Name:</h2> " + data[n].name + "<hr>")
                     var img = $("<img>")
                     img.attr("src", data[n].photo)
@@ -284,7 +285,7 @@
                     friendMatch.append(img)
                     $(".modal-body").html(friendMatch)
 
-                    $.post('api/friends', quizAnswers)
+                    $.post('api/friends', quizAnswers) // After matching with a frind, pushes user data to the friends api
                         .then(function (data) {
                             console.log(data);
                         })
@@ -292,7 +293,7 @@
 
 
 
-            function findLeastDiff(array) {
+            function findLeastDiff(array) { // Function for finding the index of the lowest number in the array.
                 var lowest = 0;
                 for (var i = 1; i < array.length; i++) {
                     if (array[i] < array[lowest]) {
