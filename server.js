@@ -4,7 +4,7 @@ var PORT = process.env.PORT || 3000;
 
 
 // Enable data-parsing methods for Express
-// app.use(express.static(app));
+app.use(express.static('app'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -14,6 +14,6 @@ require("./app/routing/htmlRoutes")(app);
 
 
 // Initiate server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     console.log("Server listening on http://localhost:" + PORT)
 })

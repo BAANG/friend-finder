@@ -10,16 +10,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <style>
+        .jumbotron {
+            margin-top: 50px;
+            border-radius: 12px;
+        }
+
+        .jumbotron>* {
+            margin: 15px;
+        }
+    </style>
+
     <title>Friend Finder</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="jumbotron jumbotron-fluid bg-info text-white">
+        <div class="jumbotron jumbotron-fluid bg-primary text-white">
             <h1>Friend Finder</h1>
             <hr>
-            <h3>Answer these difficult questions and we'll use our cutting-edge technology to find you the perfect
-                friend!</h3>
+            <h3 class="lead">Answer these difficult questions and we'll use our cutting-edge technology to match you
+                with someone with similar ideals and preferences to find you the perfect friend!</h3>
             <br>
             <a href="/survey">
                 <button class="btn btn-lg btn-dark text-white">Find Your BEST Friend Now!</button>
@@ -27,7 +38,7 @@
         </div>
         <span>
             <a href="/api/friends">API Friends</a> | <a href="https://github.com/baang/">GitHub Repo</a>
-        </span> 
+        </span>
     </div>
 
     <!-- Optional JavaScript -->
